@@ -409,33 +409,41 @@ footer .fa-stack .fa-inverse {
     margin: 0 auto;
 }
 
-/* ---------- EvoClaw performance chart ---------- */
-.evoclaw-chart {
+/* ---------- HTML/CSS bar charts (reusable) ---------- */
+.evoclaw-chart,
+.bar-chart {
     margin: 28px 0;
     padding: 20px;
     background: rgba(15, 20, 36, 0.6);
     border: 1px solid var(--cp-border);
     border-radius: 6px;
 }
-.evoclaw-chart .bar-row {
+.evoclaw-chart .bar-row,
+.bar-chart .bar-row {
     display: flex;
     align-items: center;
-    margin: 14px 0;
+    margin: 12px 0;
 }
-.evoclaw-chart .bar-label {
+.evoclaw-chart .bar-label,
+.bar-chart .bar-label {
     flex: 0 0 42%;
     font-size: 14px;
     color: var(--cp-text);
     padding-right: 12px;
     text-align: right;
 }
-.evoclaw-chart .bar-track {
+.bar-chart .bar-label.narrow {
+    flex-basis: 30%;
+}
+.evoclaw-chart .bar-track,
+.bar-chart .bar-track {
     flex: 1;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 3px;
     overflow: hidden;
 }
-.evoclaw-chart .bar-fill {
+.evoclaw-chart .bar-fill,
+.bar-chart .bar-fill {
     display: block;
     height: 26px;
     line-height: 26px;
@@ -446,19 +454,38 @@ footer .fa-stack .fa-inverse {
     padding-right: 8px;
     border-radius: 3px;
     white-space: nowrap;
+    min-width: 1.5em;
 }
-.evoclaw-chart .bar-fill.good {
+.evoclaw-chart .bar-fill.good,
+.bar-chart .bar-fill.good {
     background: linear-gradient(90deg, rgba(47, 230, 224, 0.5), var(--cp-cyan));
 }
-.evoclaw-chart .bar-fill.bad {
+.evoclaw-chart .bar-fill.bad,
+.bar-chart .bar-fill.bad {
     background: linear-gradient(90deg, rgba(255, 95, 176, 0.5), var(--cp-magenta));
 }
-.evoclaw-chart .chart-drop {
+.bar-chart .bar-fill.mid {
+    background: linear-gradient(90deg, rgba(255, 209, 121, 0.5), #ffd479);
+}
+.evoclaw-chart .chart-drop,
+.bar-chart .chart-drop {
     margin-top: 10px;
     text-align: center;
     font-size: 14px;
     color: var(--cp-magenta);
     letter-spacing: 0.04em;
+}
+.post-container .bar-chart figcaption,
+.post-container .evoclaw-chart figcaption {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--cp-text-muted);
+    text-align: center;
+}
+.post-container .bar-chart figcaption b,
+.post-container .evoclaw-chart figcaption b {
+    color: var(--cp-cyan-soft);
 }
 
 /* ---------- i18n language toggling ---------- */
