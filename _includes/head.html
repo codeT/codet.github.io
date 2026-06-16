@@ -1,5 +1,20 @@
 <head>
     <meta charset="utf-8">
+
+    <!-- i18n: decide language as early as possible to avoid flash of wrong language -->
+    <script>
+        (function () {
+            try {
+                var saved = window.localStorage.getItem('site_lang');
+                var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+                var lang = saved || (nav.indexOf('zh') === 0 ? 'zh' : 'en');
+                document.documentElement.setAttribute('lang', lang);
+            } catch (e) {
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        })();
+    </script>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">

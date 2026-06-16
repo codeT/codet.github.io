@@ -365,6 +365,29 @@ footer .fa-stack .fa-inverse {
     text-shadow: none;
 }
 
+/* ---------- i18n language toggling ---------- */
+html[lang="zh"] .i18n-en { display: none !important; }
+html[lang="en"] .i18n-zh { display: none !important; }
+
+.lang-toggle {
+    cursor: pointer;
+}
+.navbar-custom .nav li a.lang-toggle {
+    color: var(--cp-cyan) !important;
+    border: 1px solid var(--cp-border-strong);
+    border-radius: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin: 12px 0 0 6px;
+    line-height: 1;
+}
+.navbar-custom .nav li a.lang-toggle:hover,
+.navbar-custom .nav li a.lang-toggle:focus {
+    color: #06121a !important;
+    background-color: var(--cp-cyan) !important;
+    box-shadow: 0 0 12px rgba(47, 230, 224, 0.4);
+}
+
 /* ---------- Gitalk comment box on dark ---------- */
 .gt-container .gt-meta {
     border-bottom: 1px solid var(--cp-border);
