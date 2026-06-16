@@ -51,10 +51,10 @@ kramdown:
 # disqus_username: qiubaiying
 
 # Gitalk
+# 评论功能已关闭：clientID/clientSecret 已移除以避免在公开仓库泄露 OAuth 凭据。
+# 如需重新启用，请在 GitHub OAuth App 重新生成凭据后填入，并将 enable 改为 true。
 gitalk:
-  enable: true    #是否开启Gitalk评论
-  clientID: Ov23li4GhJl0FCDyyNDd                            #生成的clientID
-  clientSecret: f42c8c8895279fa830732c11a25a75c462069d21    #生成的clientSecret
+  enable: false   #是否开启Gitalk评论
   repo: codeT.github.io    #仓库名称
   owner: codeT    #github用户名
   admin: codeT
