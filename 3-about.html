@@ -1,135 +1,224 @@
 ---
 layout: page
-title: "About"
-description: "为了让更多中国人能融入国际语运动而作"
-header-img: "img/post-bg-rwd.jpg"
+title: "关于我"
+description: "雇佣军档案 · 已上线"
+header-img: "img/post-bg-hacker.jpg"
 ---
 
-<!-- Language Selector -->
-<!-- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select> -->
+<style>
+.intro-header {
+    background-image:
+        linear-gradient(135deg, rgba(8, 0, 24, 0.92) 0%, rgba(0, 20, 40, 0.88) 45%, rgba(40, 0, 40, 0.9) 100%),
+        url('{{ site.baseurl }}/img/post-bg-hacker.jpg') !important;
+    background-blend-mode: overlay;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.35);
+    box-shadow: 0 0 40px rgba(255, 0, 128, 0.25);
+}
+.intro-header .page-heading h1 {
+    color: #00fff9;
+    text-shadow:
+        0 0 8px rgba(0, 255, 249, 0.8),
+        0 0 24px rgba(255, 0, 128, 0.45),
+        2px 2px 0 rgba(255, 0, 128, 0.35);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+}
+.intro-header .page-heading .subheading {
+    color: rgba(255, 110, 199, 0.95);
+    text-shadow: 0 0 12px rgba(255, 0, 128, 0.6);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 13px;
+}
 
-<!-- Chinese Version -->
-<div class="zh post-container">
+.about-cyber {
+    position: relative;
+    margin: 0 auto 40px;
+    padding: 36px 32px 32px;
+    max-width: 760px;
+    color: #c8f7ff;
+    background:
+        linear-gradient(160deg, rgba(12, 8, 28, 0.96) 0%, rgba(4, 18, 32, 0.98) 55%, rgba(24, 0, 36, 0.96) 100%);
+    border: 1px solid rgba(0, 255, 249, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(255, 0, 128, 0.15) inset,
+        0 0 30px rgba(0, 255, 249, 0.12),
+        0 18px 50px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+}
+.about-cyber::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 249, 0.03) 0,
+            rgba(0, 255, 249, 0.03) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    pointer-events: none;
+    animation: cyber-scan 8s linear infinite;
+}
+.about-cyber::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(255, 0, 128, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+.about-cyber > * {
+    position: relative;
+    z-index: 1;
+}
+.about-cyber__title {
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    color: #00fff9;
+    font-size: 28px;
+    letter-spacing: 0.18em;
+    border-bottom: 1px solid rgba(255, 0, 128, 0.45);
+    text-shadow: 0 0 16px rgba(0, 255, 249, 0.55);
+}
+.about-cyber__title::before {
+    content: "// ";
+    color: #ff2ea6;
+}
+.about-cyber__lead {
+    margin: 0 0 28px;
+    color: #dffaff;
+    font-size: 17px;
+    line-height: 2;
+    text-shadow: 0 0 8px rgba(0, 255, 249, 0.15);
+}
+.about-cyber__lead strong {
+    color: #ff6ec7;
+    font-weight: 600;
+}
+.about-cyber__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+}
+.about-cyber__tags li {
+    padding: 8px 14px;
+    color: #00fff9;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    background: rgba(0, 255, 249, 0.06);
+    border: 1px solid rgba(0, 255, 249, 0.35);
+    box-shadow: 0 0 12px rgba(0, 255, 249, 0.12);
+}
+.about-cyber__tags li:nth-child(odd) {
+    color: #ff6ec7;
+    border-color: rgba(255, 0, 128, 0.4);
+    background: rgba(255, 0, 128, 0.08);
+    box-shadow: 0 0 12px rgba(255, 0, 128, 0.12);
+}
+.about-cyber__footer {
+    margin: 0;
+    padding-top: 18px;
+    color: rgba(255, 110, 199, 0.92);
+    font-size: 15px;
+    line-height: 1.9;
+    border-top: 1px dashed rgba(0, 255, 249, 0.25);
+}
+.about-cyber__footer em {
+    color: #00fff9;
+    font-style: normal;
+    text-shadow: 0 0 10px rgba(0, 255, 249, 0.45);
+}
+.about-cyber__status {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 12px;
+    color: #120018;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00fff9, #ff2ea6);
+    box-shadow: 0 0 18px rgba(255, 0, 128, 0.35);
+}
 
-    <!--copied from markdown -->
-    <blockquote><p>冰冻三尺 非一日之寒<br>
-    积土成山 非斯须之作</p></blockquote>
+@keyframes cyber-scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(8px); }
+}
 
-    <p>Hi，我是<strong>Dr. Henri Jambo</strong>，现旅居世界上著名的多元文化城市——蒙特利尔。在魁北克，我们不仅感受到英语、法语的强烈冲突，甚至也能感受到阿拉伯语、中文等多种语言的相互碰撞。</p>
+@media (max-width: 767px) {
+    .about-cyber {
+        padding: 24px 18px 22px;
+    }
+    .about-cyber__title {
+        font-size: 22px;
+    }
+    .about-cyber__lead {
+        font-size: 15px;
+        line-height: 1.85;
+    }
+}
+</style>
 
-    <p>同时我深知中国也许是世界上英语学习人均投入最多的国家，但中国人学好英语的不多，社会资源浪费很大。</p>
-    
-    <p>为了让全世界都有一门共同的、简单的外语可以学习，降低外语学习的成本并让大家相互沟通更容易，我设计了这门中西融合的人造国际语。</p>
-    
-    <p>她是对世界语和其他国际语的传承，也希望她能超越世界语。</p>
-    
-    <p>希望更多的人加入到这个社群中，共同成长。这是新的希望！</p>
+<div class="about-cyber post-container">
+    <h2 class="about-cyber__title">关于我</h2>
 
-    <p>本网站为三叶语官方网站。您也可关注知乎专栏<a href="https://zhuanlan.zhihu.com/Artificial-International-Language">👉人造国际语</a>。如果您有什么建议，欢迎提出探讨~</p>
+    <p class="about-cyber__lead">
+        <strong>JAVA 后端</strong>、<strong>前端</strong>、<strong>GO</strong>、
+        <strong>K8s 运维工程师</strong>（<strong>CKA、CKS 认证安全专家</strong>）、
+        <strong>系统架构师</strong>、<strong>系统分析师</strong>，爱好技术社区及开源。
+    </p>
 
-    <p></p>
-    
-</div>
-
-<!-- English Version -->
-<!-- <div class="en post-container">
-    <blockquote><p>Yet another iOS Developer. <br>
-    Yet another Life-long Student.</p></blockquote>
-
-    <p>Hi, I am <strong>Baiying Qiu</strong>，you can call me <strong>BY</strong>. I am an iOS software engineer and currently working in Xiamen</p>
-
-    <p>This is my personal blog, through making Github Pages and Jekyll.My GitHub  👉 <a href="http://github.com/qiubaiying">Github·BY</a>.</p>
-    
-    <p>I am a sports enthusiast, I like fitness, running and boxing.</p>
-
-    <h5>Talks</h5>
-
-    <ul>
-    <li><a href="https://github.com">GitHub</a></li>
-    <li><a href="http://jekyll.com.cn/">jekyll</a></li>
-    <li><a href="https://pages.github.com/">GitHub Pages</a></li>
-    <li><a href="https://qiubaiying.github.io">BY</a></li>
+    <ul class="about-cyber__tags">
+        <li>JAVA 后端</li>
+        <li>前端</li>
+        <li>GO</li>
+        <li>K8s 运维</li>
+        <li>CKA / CKS</li>
+        <li>系统架构师</li>
+        <li>系统分析师</li>
+        <li>开源社区</li>
     </ul>
-</div> -->
 
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render(){
-        var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            window.location.hash = "#zh"
-        }else{
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
-
+    <p class="about-cyber__footer">
+        中年混饭工程师一枚，<em>兼职外包和雇佣军</em>。
+        <span class="about-cyber__status">STATUS: MERCENARY MODE</span>
+    </p>
+</div>
 
 <!-- Gitalk 评论 start  -->
 {% if site.gitalk.enable %}
-<!-- Gitalk link  -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
-    <script type="text/javascript">
+<script type="text/javascript">
     var gitalk = new Gitalk({
-    clientID: '{{site.gitalk.clientID}}',
-    clientSecret: '{{site.gitalk.clientSecret}}',
-    repo: '{{site.gitalk.repo}}',
-    owner: '{{site.gitalk.owner}}',
-    admin: ['{{site.gitalk.admin}}'],
-    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
-    id: 'about',
+        clientID: '{{site.gitalk.clientID}}',
+        clientSecret: '{{site.gitalk.clientSecret}}',
+        repo: '{{site.gitalk.repo}}',
+        owner: '{{site.gitalk.owner}}',
+        admin: ['{{site.gitalk.admin}}'],
+        distractionFreeMode: {{site.gitalk.distractionFreeMode}},
+        id: 'about',
     });
     gitalk.render('gitalk-container');
 </script>
 {% endif %}
 <!-- Gitalk end -->
 
- <!-- disqus 评论框 start  -->
+<!-- disqus 评论框 start  -->
 {% if site.disqus.enable %}
-
 <div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
-    </div>
+    <div id="disqus_thread" class="disqus-thread"></div>
 </div>
-<!-- disqus 评论框 end -->
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus.username}}";
     var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
     var disqus_url = "{{site.url}}{{page.url}}";
@@ -140,6 +229,4 @@ header-img: "img/post-bg-rwd.jpg"
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- disqus 公共JS代码 end -->
 {% endif %}
-
