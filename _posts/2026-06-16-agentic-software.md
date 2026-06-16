@@ -11,6 +11,7 @@ date:        2026-06-16
 author:      Zhenfeng Cao
 header-img:  "img/post-bg-universe.jpg"
 catalog:     false
+mathjax:     true
 categories:  [paper]
 tags:
     - 论文
@@ -51,7 +52,7 @@ tags:
 
 **定义 2.1（传统软件系统）：** 传统软件系统 S 是一个三元组，其中 C 是计算资源集合（CPU、内存、I/O）；D 是编码在源码中的确定性决策规则集合；E 是把 D 作用于输入以产生输出的执行环境。
 
-<div class="formula"><span class="var">S</span> = (<span class="var">C</span>, <span class="var">D</span>, <span class="var">E</span>)</div>
+<div class="formula">\[ S = (C,\,D,\,E) \]</div>
 
 关键性质在于：**D 相对于执行是静态的**——所有决策逻辑都必须在系统遇到任何输入之前由人类工程师显式写好。
 
@@ -63,7 +64,7 @@ Brooks 区分了“偶然复杂性”（特定实现的产物）与“本质复�
 
 **命题 2.1（复杂性伸缩）：** 对一个含 n 个组件、每个都可能与任意其他组件交互的系统，可能的交互拓扑数量呈超指数增长；而人类对这些交互进行推理的认知能力本质上是恒定的。
 
-<div class="formula">| 交互拓扑数 | = 2<sup>C(<span class="var">n</span>,&thinsp;2)</sup> = 2<sup><span class="var">n</span>(<span class="var">n</span>&minus;1)/2</sup> = &Theta;(2<sup><span class="var">n</span>²</sup>)</div>
+<div class="formula">\[ N_{\text{topo}} = 2^{\binom{n}{2}} = 2^{\,n(n-1)/2} = \Theta\!\left(2^{\,n^{2}}\right) \]</div>
 
 这种错配，正是软件项目随规模增长而边际生产率递减的深层结构性原因。
 
@@ -71,11 +72,11 @@ Brooks 区分了“偶然复杂性”（特定实现的产物）与“本质复�
 
 **定义 2.2（AI 智能体系统）：** AI 智能体系统 A 是一个四元组，其中 M 是作为推理引擎的大语言模型；T 是可执行工具集合（代码解释器、API、数据库、文件系统）；𝓜 是记忆子系统（短期上下文、长期向量库）；Π 是把用户意图分解为动作序列的规划机制。
 
-<div class="formula"><span class="var">A</span> = (<span class="var">M</span>, <span class="var">T</span>, 𝓜, &Pi;)</div>
+<div class="formula">\[ A = (M,\,T,\,\mathcal{M},\,\Pi) \]</div>
 
 系统通过迭代执行运作——在时刻 t，模型根据当前状态与记忆选择动作，执行后转移到下一状态：
 
-<div class="formula"><span class="var">a</span><sub>t</sub> = <span class="var">M</span>(<span class="var">s</span><sub>t</sub>, 𝓜) ,&emsp; <span class="var">s</span><sub>t+1</sub> = exec(<span class="var">a</span><sub>t</sub>)</div>
+<div class="formula">\[ a_t = M(s_t,\,\mathcal{M}), \qquad s_{t+1} = \operatorname{exec}(a_t) \]</div>
 
 关键区别在于：在智能体系统中，**决策逻辑在运行时生成**。LLM 可动态产生代码、调用工具、并依据中间结果调整行为——这些都未被显式预先编程。它生成的代码不是系统本身，而是按需产生、用后即弃的临时产物。
 
@@ -244,7 +245,7 @@ We make three central claims:
 
 **Definition 2.1 (Traditional Software System).** A traditional software system S is a tuple where C is a set of computational resources (CPU, memory, I/O); D is a set of deterministic decision rules encoded in source code; E is an execution environment that evaluates D against inputs to produce outputs.
 
-<div class="formula"><span class="var">S</span> = (<span class="var">C</span>, <span class="var">D</span>, <span class="var">E</span>)</div>
+<div class="formula">\[ S = (C,\,D,\,E) \]</div>
 
 The critical property is that **D is static with respect to execution**: all decision logic must be explicitly written by human engineers before the system encounters any input.
 
@@ -256,7 +257,7 @@ Brooks distinguished between accidental complexity (artifacts of particular impl
 
 **Proposition 2.1 (Complexity Scaling).** For a system with n components, each potentially interacting with any other, the number of possible interaction topologies grows super-exponentially, while human cognitive capacity to reason about these interactions is essentially constant.
 
-<div class="formula">| interaction topologies | = 2<sup>C(<span class="var">n</span>,&thinsp;2)</sup> = 2<sup><span class="var">n</span>(<span class="var">n</span>&minus;1)/2</sup> = &Theta;(2<sup><span class="var">n</span>²</sup>)</div>
+<div class="formula">\[ N_{\text{topo}} = 2^{\binom{n}{2}} = 2^{\,n(n-1)/2} = \Theta\!\left(2^{\,n^{2}}\right) \]</div>
 
 This mismatch is the deep structural reason why software projects experience declining marginal productivity as they grow.
 
@@ -264,11 +265,11 @@ This mismatch is the deep structural reason why software projects experience dec
 
 **Definition 2.2 (AI Agent System).** An AI agent system A is a tuple where M is a large language model serving as the reasoning engine; T is a set of executable tools (code interpreters, APIs, databases, file systems); 𝓜 is a memory subsystem (short-term context, long-term vector store); Π is a planning mechanism that decomposes user intent into action sequences.
 
-<div class="formula"><span class="var">A</span> = (<span class="var">M</span>, <span class="var">T</span>, 𝓜, &Pi;)</div>
+<div class="formula">\[ A = (M,\,T,\,\mathcal{M},\,\Pi) \]</div>
 
 The system operates iteratively — at step t, the model selects an action from the current state and memory, then transitions to the next state:
 
-<div class="formula"><span class="var">a</span><sub>t</sub> = <span class="var">M</span>(<span class="var">s</span><sub>t</sub>, 𝓜) ,&emsp; <span class="var">s</span><sub>t+1</sub> = exec(<span class="var">a</span><sub>t</sub>)</div>
+<div class="formula">\[ a_t = M(s_t,\,\mathcal{M}), \qquad s_{t+1} = \operatorname{exec}(a_t) \]</div>
 
 The key distinction is that in an agentic system, the **decision logic is generated at runtime**. The code it generates is not the system; it is a transient artifact, produced and discarded as needed. This maps to Karpathy's "Software 2.0" but extends it: the neural network does not merely replace the program—it writes programs on demand, consistent with the ReAct framework and Chain-of-Thought prompting.
 

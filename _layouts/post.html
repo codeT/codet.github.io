@@ -226,3 +226,20 @@ layout: default
     }
 </style>
 {% endif %}
+
+{% if page.mathjax %}
+<!-- MathJax 3 (CHTML, selectable/copyable). Pinned version + SRI for supply-chain safety. -->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            ignoreHtmlClass: 'highlight|tex2jax_ignore'
+        }
+    };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js" integrity="sha384-NR8saakDju74wZ6sprPPhEoWbaP3iVtXVJH12mRSiaIgxMdi33mOQj8bnF2WxzY3" crossorigin="anonymous"></script>
+{% endif %}

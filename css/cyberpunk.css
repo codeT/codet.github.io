@@ -401,10 +401,12 @@ footer .fa-stack .fa-inverse {
     border-left: 3px solid var(--cp-cyan);
     border-radius: 4px;
     overflow-x: auto;
-    white-space: nowrap;
 }
 .post-container .formula .var {
     font-style: italic;
+}
+.post-container .formula mjx-container {
+    margin: 0 auto;
 }
 
 /* ---------- EvoClaw performance chart ---------- */
