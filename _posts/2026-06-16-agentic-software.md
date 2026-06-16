@@ -49,7 +49,11 @@ tags:
 
 ### 2.1 传统软件的本质
 
-**定义 2.1（传统软件系统）：** 传统软件系统 S 是一个三元组 S = (C, D, E)，其中 C 是计算资源集合（CPU、内存、I/O）；D 是编码在源码中的确定性决策规则集合；E 是把 D 作用于输入以产生输出的执行环境。关键性质在于：**D 相对于执行是静态的**——所有决策逻辑都必须在系统遇到任何输入之前由人类工程师显式写好。
+**定义 2.1（传统软件系统）：** 传统软件系统 S 是一个三元组，其中 C 是计算资源集合（CPU、内存、I/O）；D 是编码在源码中的确定性决策规则集合；E 是把 D 作用于输入以产生输出的执行环境。
+
+<div class="formula"><span class="var">S</span> = (<span class="var">C</span>, <span class="var">D</span>, <span class="var">E</span>)</div>
+
+关键性质在于：**D 相对于执行是静态的**——所有决策逻辑都必须在系统遇到任何输入之前由人类工程师显式写好。
 
 在此定义下，每一次特性新增、缺陷修复、对环境变化的适配，都要求人去（a）理解所需变更、（b）在 D 中定位正确位置、（c）在不引入回归的前提下修改逻辑、（d）验证正确性。每次变更的成本是 D 的规模及其内部依赖密度的函数。
 
@@ -57,11 +61,21 @@ tags:
 
 Brooks 区分了“偶然复杂性”（特定实现的产物）与“本质复杂性”（问题固有）。数十年的进步——更高级的语言、框架、自动化测试——系统性地降低了偶然复杂性，但本质复杂性依旧无界。
 
-**命题 2.1（复杂性伸缩）：** 对一个含 n 个组件、每个都可能与任意其他组件交互的系统，可能的交互拓扑数量为 2^(n 选 2)，呈超指数增长；而人类对这些交互进行推理的认知能力本质上是恒定的。这种错配，正是软件项目随规模增长而边际生产率递减的深层结构性原因。
+**命题 2.1（复杂性伸缩）：** 对一个含 n 个组件、每个都可能与任意其他组件交互的系统，可能的交互拓扑数量呈超指数增长；而人类对这些交互进行推理的认知能力本质上是恒定的。
+
+<div class="formula">| 交互拓扑数 | = 2<sup>C(<span class="var">n</span>,&thinsp;2)</sup> = 2<sup><span class="var">n</span>(<span class="var">n</span>&minus;1)/2</sup> = &Theta;(2<sup><span class="var">n</span>²</sup>)</div>
+
+这种错配，正是软件项目随规模增长而边际生产率递减的深层结构性原因。
 
 ### 2.3 智能体系统：形式化模型
 
-**定义 2.2（AI 智能体系统）：** AI 智能体系统 A 是四元组 A = (M, T, M, Π)，其中 M 是作为推理引擎的大语言模型；T 是可执行工具集合（代码解释器、API、数据库、文件系统）；M 是记忆子系统（短期上下文、长期向量库）；Π 是把用户意图分解为动作序列的规划机制。系统通过迭代执行运作：aₜ ← M(sₜ, M)，sₜ₊₁ ← exec(aₜ)。
+**定义 2.2（AI 智能体系统）：** AI 智能体系统 A 是一个四元组，其中 M 是作为推理引擎的大语言模型；T 是可执行工具集合（代码解释器、API、数据库、文件系统）；𝓜 是记忆子系统（短期上下文、长期向量库）；Π 是把用户意图分解为动作序列的规划机制。
+
+<div class="formula"><span class="var">A</span> = (<span class="var">M</span>, <span class="var">T</span>, 𝓜, &Pi;)</div>
+
+系统通过迭代执行运作——在时刻 t，模型根据当前状态与记忆选择动作，执行后转移到下一状态：
+
+<div class="formula"><span class="var">a</span><sub>t</sub> = <span class="var">M</span>(<span class="var">s</span><sub>t</sub>, 𝓜) ,&emsp; <span class="var">s</span><sub>t+1</sub> = exec(<span class="var">a</span><sub>t</sub>)</div>
 
 关键区别在于：在智能体系统中，**决策逻辑在运行时生成**。LLM 可动态产生代码、调用工具、并依据中间结果调整行为——这些都未被显式预先编程。它生成的代码不是系统本身，而是按需产生、用后即弃的临时产物。
 
@@ -107,7 +121,14 @@ Brooks 区分了“偶然复杂性”（特定实现的产物）与“本质复�
 
 智能体工程由 LangChain 于 2026 年 4 月正式提出，定义为“一种多智能体协调模型：AI 智能体作为数字团队成员——各有明确角色、共享记忆、统一可观测层——驱动软件走完整个交付流水线，而不仅仅是更快地生成代码”。我们主张：智能体工程不取代软件工程，而是扩展它——智能体本身就是软件，构建、部署与治理智能体系统正是该学科的下一前沿。
 
-基于 LLM 的软件工程智能体可归纳为三大核心模块：**感知**（多模态输入处理）、**记忆**（语义、情景、程序性）、**行动**（内部推理 + 外部工具使用），全部由 LLM 推理核心编排。Nous Research 的开源框架 Hermes Agent 是这一架构的具体实现，其最重要的特征是闭环学习：完成复杂任务后，智能体自主创建可复用的“技能”（参数化程序模块），并在后续使用中自我改进、在发现不足时自动打补丁。
+基于 LLM 的软件工程智能体可归纳为三大核心模块：**感知**（多模态输入处理）、**记忆**（语义、情景、程序性）、**行动**（内部推理 + 外部工具使用），全部由 LLM 推理核心编排。
+
+<figure>
+    <img src="{{ site.baseurl }}/img/paper-agent-framework.png" alt="面向软件工程的基于 LLM 的智能体框架">
+    <figcaption><b>图 1：</b>面向软件工程的基于 LLM 的智能体框架（改编自 Wang et al.）。感知模块处理多模态输入；记忆模块维护语义、情景与程序性知识；行动模块执行内部推理与外部工具调用；三者由 LLM 推理核心统一编排，并与外部环境交互。</figcaption>
+</figure>
+
+Nous Research 的开源框架 Hermes Agent 是这一架构的具体实现，其最重要的特征是闭环学习：完成复杂任务后，智能体自主创建可复用的“技能”（参数化程序模块），并在后续使用中自我改进、在发现不足时自动打补丁。
 
 ### 4.2 智能体工程 vs. 传统软件工程
 
@@ -143,6 +164,19 @@ Brooks 区分了“偶然复杂性”（特定实现的产物）与“本质复�
 EvoClaw 基准提供了最发人深省的数据。它要求智能体进行**持续软件演化**——不是孤立的 issue 修复，而是跨提交历史的持续开发，每次变更都须保持系统完整性、错误会累积。其关键发现：
 
 > “整体性能分数从孤立任务上的 >80% 显著下降到持续场景中的至多 38%，暴露了智能体在长期维护与错误传播上的严重困境。”
+
+<figure class="evoclaw-chart">
+    <div class="bar-row">
+        <span class="bar-label">孤立任务 / Isolated</span>
+        <span class="bar-track"><span class="bar-fill good" style="width:82%;">82%</span></span>
+    </div>
+    <div class="bar-row">
+        <span class="bar-label">持续演化 / Continuous</span>
+        <span class="bar-track"><span class="bar-fill bad" style="width:38%;">38%</span></span>
+    </div>
+    <div class="chart-drop">▼ 成功率下降约 54%</div>
+    <figcaption><b>图 2：</b>智能体在 EvoClaw 基准上的表现。在评估“持续软件演化”（跨提交持续开发、错误会累积）时，成功率从 80% 以上骤降至至多 38%。数据基于 4 个智能体框架下 12 个前沿模型的评测。</figcaption>
+</figure>
 
 由此揭示四大核心挑战：**上下文漂移**（代码库超出有效上下文窗口后，智能体失去对系统级不变量与依赖的连贯理解）、**错误传播**（早期提交的小错误级联放大，智能体缺乏稳健的检测与恢复机制）、**技术债意识**（智能体不为其设计决策的长期成本建模，只优化当下任务完成）、**验证保真度**（自动化测试仍不完整，智能体可能通过测试却引入只在新输入下显现的细微语义错误）。
 
@@ -208,7 +242,11 @@ We make three central claims:
 
 ### 2.1 The Nature of Traditional Software
 
-**Definition 2.1 (Traditional Software System).** A traditional software system S is a tuple S = (C, D, E) where C is a set of computational resources (CPU, memory, I/O); D is a set of deterministic decision rules encoded in source code; E is an execution environment that evaluates D against inputs to produce outputs. The critical property is that **D is static with respect to execution**: all decision logic must be explicitly written by human engineers before the system encounters any input.
+**Definition 2.1 (Traditional Software System).** A traditional software system S is a tuple where C is a set of computational resources (CPU, memory, I/O); D is a set of deterministic decision rules encoded in source code; E is an execution environment that evaluates D against inputs to produce outputs.
+
+<div class="formula"><span class="var">S</span> = (<span class="var">C</span>, <span class="var">D</span>, <span class="var">E</span>)</div>
+
+The critical property is that **D is static with respect to execution**: all decision logic must be explicitly written by human engineers before the system encounters any input.
 
 Under this definition, every feature addition, bug fix, and adaptation requires a human to (a) understand the change needed, (b) locate the correct position in D, (c) modify the logic without introducing regressions, and (d) verify correctness. The cost of each change is a function of the size of D and the density of its internal dependencies.
 
@@ -216,11 +254,21 @@ Under this definition, every feature addition, bug fix, and adaptation requires 
 
 Brooks distinguished between accidental complexity (artifacts of particular implementations) and essential complexity (inherent to the problem). While decades of advances have reduced accidental complexity, essential complexity remains unbounded.
 
-**Proposition 2.1 (Complexity Scaling).** For a system with n components, each potentially interacting with any other, the number of possible interaction topologies is 2^(n choose 2), which grows super-exponentially, while human cognitive capacity to reason about these interactions is essentially constant. This mismatch is the deep structural reason why software projects experience declining marginal productivity as they grow.
+**Proposition 2.1 (Complexity Scaling).** For a system with n components, each potentially interacting with any other, the number of possible interaction topologies grows super-exponentially, while human cognitive capacity to reason about these interactions is essentially constant.
+
+<div class="formula">| interaction topologies | = 2<sup>C(<span class="var">n</span>,&thinsp;2)</sup> = 2<sup><span class="var">n</span>(<span class="var">n</span>&minus;1)/2</sup> = &Theta;(2<sup><span class="var">n</span>²</sup>)</div>
+
+This mismatch is the deep structural reason why software projects experience declining marginal productivity as they grow.
 
 ### 2.3 Agentic Systems: A Formal Model
 
-**Definition 2.2 (AI Agent System).** An AI agent system A is a tuple A = (M, T, M, Π) where M is a large language model serving as the reasoning engine; T is a set of executable tools (code interpreters, APIs, databases, file systems); M is a memory subsystem (short-term context, long-term vector store); Π is a planning mechanism that decomposes user intent into action sequences. The system operates iteratively: aₜ ← M(sₜ, M), sₜ₊₁ ← exec(aₜ).
+**Definition 2.2 (AI Agent System).** An AI agent system A is a tuple where M is a large language model serving as the reasoning engine; T is a set of executable tools (code interpreters, APIs, databases, file systems); 𝓜 is a memory subsystem (short-term context, long-term vector store); Π is a planning mechanism that decomposes user intent into action sequences.
+
+<div class="formula"><span class="var">A</span> = (<span class="var">M</span>, <span class="var">T</span>, 𝓜, &Pi;)</div>
+
+The system operates iteratively — at step t, the model selects an action from the current state and memory, then transitions to the next state:
+
+<div class="formula"><span class="var">a</span><sub>t</sub> = <span class="var">M</span>(<span class="var">s</span><sub>t</sub>, 𝓜) ,&emsp; <span class="var">s</span><sub>t+1</sub> = exec(<span class="var">a</span><sub>t</sub>)</div>
 
 The key distinction is that in an agentic system, the **decision logic is generated at runtime**. The code it generates is not the system; it is a transient artifact, produced and discarded as needed. This maps to Karpathy's "Software 2.0" but extends it: the neural network does not merely replace the program—it writes programs on demand, consistent with the ReAct framework and Chain-of-Thought prompting.
 
@@ -252,7 +300,14 @@ The alternative paradigm collapses the distinction between software and its exec
 
 ### 4.1 Defining the Field
 
-Agentic Engineering, formally introduced by LangChain in April 2026, is "a multi-agent coordination model where AI agents function as digital team members—each with defined roles, shared memory, and a unified observability layer—to drive software through the entire delivery pipeline." It does not replace software engineering but expands it. LLM-based agents comprise three core modules: **Perception** (multi-modal input), **Memory** (semantic, episodic, procedural), and **Action** (internal reasoning + external tool use), orchestrated by the LLM reasoning core. Hermes Agent (Nous Research) realizes this with a closed learning loop: it autonomously creates reusable Skills that self-improve and self-patch.
+Agentic Engineering, formally introduced by LangChain in April 2026, is "a multi-agent coordination model where AI agents function as digital team members—each with defined roles, shared memory, and a unified observability layer—to drive software through the entire delivery pipeline." It does not replace software engineering but expands it. LLM-based agents comprise three core modules: **Perception** (multi-modal input), **Memory** (semantic, episodic, procedural), and **Action** (internal reasoning + external tool use), orchestrated by the LLM reasoning core.
+
+<figure>
+    <img src="{{ site.baseurl }}/img/paper-agent-framework.png" alt="LLM-based agent framework for software engineering">
+    <figcaption><b>Figure 1:</b> The LLM-based agent framework for software engineering (adapted from Wang et al.). The perception module handles multi-modal input; the memory module maintains semantic, episodic, and procedural knowledge; the action module executes both internal reasoning and external tool invocations — all orchestrated by the LLM reasoning core, interacting with the external environment.</figcaption>
+</figure>
+
+Hermes Agent (Nous Research) realizes this with a closed learning loop: it autonomously creates reusable Skills that self-improve and self-patch.
 
 ### 4.2 Contrasting Agentic and Traditional Engineering
 
@@ -286,6 +341,19 @@ In the agentic paradigm, code-generation skill becomes commoditized. The new hum
 The EvoClaw benchmark requires **continuous software evolution**—sustained development across commit histories where errors accumulate. Its key finding:
 
 > "Overall performance scores drop significantly from > 80% on isolated tasks to at most 38% in continuous settings, exposing agents' profound struggle with long-term maintenance and error propagation."
+
+<figure class="evoclaw-chart">
+    <div class="bar-row">
+        <span class="bar-label">Isolated Tasks</span>
+        <span class="bar-track"><span class="bar-fill good" style="width:82%;">82%</span></span>
+    </div>
+    <div class="bar-row">
+        <span class="bar-label">Continuous Evolution</span>
+        <span class="bar-track"><span class="bar-fill bad" style="width:38%;">38%</span></span>
+    </div>
+    <div class="chart-drop">▼ ~54% drop in success rate</div>
+    <figcaption><b>Figure 2:</b> Agent performance on the EvoClaw benchmark. When evaluated on continuous software evolution (sustained development across commits with error accumulation), success rates collapse from over 80% to at most 38%. Data based on 12 frontier models across 4 agent frameworks.</figcaption>
+</figure>
 
 Four core challenges follow: **context drift**, **error propagation**, **technical-debt awareness**, and **verification fidelity** (agents can pass tests while introducing subtle semantic errors). The gap between isolated-task (>80%) and continuous-evolution (<38%) quantifies the distance to fully autonomous software engineering. This gap is not fundamental—it reflects active research areas in context management, memory architecture, and verification.
 
