@@ -10,7 +10,7 @@ excerpt_en:  "For over half a century, software engineering rested on one premis
 date:        2026-06-16
 author:      Zhenfeng Cao
 header-img:  "img/post-bg-universe.jpg"
-catalog:     false
+catalog:     true
 mathjax:     true
 categories:  [paper]
 tags:

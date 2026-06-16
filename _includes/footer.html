@@ -111,6 +111,7 @@
         function apply(lang) {
             document.documentElement.setAttribute('lang', lang);
             try { window.localStorage.setItem('site_lang', lang); } catch (e) {}
+            document.dispatchEvent(new CustomEvent('site:langchange', { detail: lang }));
         }
         var toggles = document.querySelectorAll('.lang-toggle');
         for (var i = 0; i < toggles.length; i++) {
@@ -244,7 +245,10 @@
 <script type="text/javascript">
     function generateCatalog (selector) {
         var P = $('div.post-container'),a,n,t,l,i,c;
-        a = P.find('h1,h2,h3,h4,h5,h6');
+        $(selector).empty();
+        // Only list headings in the currently visible language block,
+        // so bilingual posts don't show duplicate zh/en entries.
+        a = P.find('h1,h2,h3,h4,h5,h6').filter(':visible');
         a.each(function () {
             n = $(this).prop('tagName').toLowerCase();
             i = "#"+$(this).prop('id');
@@ -257,6 +261,11 @@
     }
 
     generateCatalog(".catalog-body");
+
+    // Rebuild the catalog when the site language is switched.
+    document.addEventListener('site:langchange', function () {
+        generateCatalog(".catalog-body");
+    });
 
     // toggle side catalog
     $(".catalog-toggle").click((function(e){
