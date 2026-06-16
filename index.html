@@ -11,19 +11,19 @@ description_en: "Memories and learning resources"
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">
-            {{ post.title }}
+            {% if post.title_zh or post.title_en %}<span class="i18n-zh">{{ post.title_zh | default: post.title }}</span><span class="i18n-en">{{ post.title_en | default: post.title }}</span>{% else %}{{ post.title }}{% endif %}
         </h2>
-        {% if post.subtitle %}
+        {% if post.subtitle or post.subtitle_zh or post.subtitle_en %}
         <h3 class="post-subtitle">
-            {{ post.subtitle }}
+            {% if post.subtitle_zh or post.subtitle_en %}<span class="i18n-zh">{{ post.subtitle_zh | default: post.subtitle }}</span><span class="i18n-en">{{ post.subtitle_en | default: post.subtitle }}</span>{% else %}{{ post.subtitle }}{% endif %}
         </h3>
         {% endif %}
         <div class="post-content-preview">
-            {{ post.content | strip_html | truncate:200 }}
+            {% if post.excerpt_zh or post.excerpt_en %}<span class="i18n-zh">{{ post.excerpt_zh }}</span><span class="i18n-en">{{ post.excerpt_en }}</span>{% else %}{{ post.content | strip_html | truncate:200 }}{% endif %}
         </div>
     </a>
     <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        <span class="i18n-zh">由 {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} 发表于 {{ post.date | date: "%Y年%-m月%-d日" }}</span><span class="i18n-en">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</span>
     </p>
 </div>
 <hr>

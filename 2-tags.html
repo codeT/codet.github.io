@@ -50,11 +50,11 @@ header-img: "img/tag-bg.jpg"
 				 <div class="post-preview">
 				    <a href="{{ post.url | prepend: site.baseurl }}">
 				        <h2 class="post-title">
-                            {{ post.title }}
+                            {% if post.title_zh or post.title_en %}<span class="i18n-zh">{{ post.title_zh | default: post.title }}</span><span class="i18n-en">{{ post.title_en | default: post.title }}</span>{% else %}{{ post.title }}{% endif %}
 				        </h2>
-				        {% if post.subtitle %}
+				        {% if post.subtitle or post.subtitle_zh or post.subtitle_en %}
 				        <h3 class="post-subtitle">
-				            {{ post.subtitle }}
+				            {% if post.subtitle_zh or post.subtitle_en %}<span class="i18n-zh">{{ post.subtitle_zh | default: post.subtitle }}</span><span class="i18n-en">{{ post.subtitle_en | default: post.subtitle }}</span>{% else %}{{ post.subtitle }}{% endif %}
 				        </h3>
 				        {% endif %}
 				    </a>
