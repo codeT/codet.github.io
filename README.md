@@ -1,16 +1,34 @@
-本项目仅仅是为了前来Fork的朋友保留的，原则上不再更新。本项目示范网站地址为：https://klovien.github.io 。
+# 姚工的备份
 
-三叶草国际语已更名为“格罗比言·全球语”，新的项目地址为：
+个人技术博客与记忆备份，记录技术文章、学习笔记与生活片段。
 
-* 中文版：https://gitee.com/globien/globien
-* 英文版：https://github.com/globien/globien.github.io
+- 在线访问：https://codet.github.io
+- 仓库地址：https://github.com/codeT/codet.github.io
 
-### 致谢
+## 本地预览
 
-1. 这个模板是从这里 [BY](https://github.com/qiubaiying/qiubaiying.github.io) fork 的, 感谢作者BY。 
-2. BY的模板应该是从这个模板 [Hux](https://github.com/Huxpro/huxpro.github.io) fork 的, 也一起感谢一下。
-3. 感谢 Jekyll、Github Pages 和 Bootstrap!
+安装依赖后启动 Jekyll 服务：
 
-### License
+```bash
+bundle install
+jekyll serve
+```
 
-遵循 MIT 许可证。有关详细,请参阅 [LICENSE](https://github.com/klovien/klovien.github.io/blob/master/LICENSE)。
+或使用 npm 脚本（需 Node.js）：
+
+```bash
+npm install
+npm run watch
+```
+
+## 致谢
+
+本博客模板源自以下项目，在此表示感谢：
+
+1. [BY Blog](https://github.com/qiubaiying/qiubaiying.github.io) — 感谢作者 BY
+2. [Hux Blog](https://github.com/Huxpro/huxpro.github.io) — Hux 的原始模板
+3. 感谢 Jekyll、GitHub Pages 和 Bootstrap
+
+## License
+
+遵循 MIT 许可证，详见 [LICENSE](./LICENSE)。
