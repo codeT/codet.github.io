@@ -29,6 +29,11 @@ tags:
 
 生成式 AI 的爆发式普及，让提示词注入、越狱攻击从小众的安全研究话题变成了全行业必须面对的严峻挑战。正如 OWASP 在 2025 年 AI 应用安全 Top 10 报告中明确指出的，**提示词注入是目前对生成式 AI 应用最普遍、危害最大的安全威胁**，它能够绕过所有传统的访问控制机制，诱导 AI 执行未经授权的操作。
 
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-1.png" alt="提示词注入攻击流程示意">
+    <figcaption><b>图 1：</b>提示词注入攻击流程：恶意提示词经 AI Agent 执行，最终导致行为失控或数据泄露。</figcaption>
+</figure>
+
 然而，与之形成鲜明对比的是，当前行业内的 AI 安全测试方法却严重滞后，绝大多数测试仍然依赖 API 调用的方式实现批量执行，这种方法存在着难以弥补的根本性缺陷。
 
 安全研究员 Eliana Zhang 在《为什么你的 AI 安全测试毫无意义》一文中尖锐地指出："API 测试只能验证 API 接口的安全性，而用户实际使用的是网页端和客户端。" 这一观点得到了大量实际案例的印证：
@@ -45,6 +50,11 @@ tags:
 针对这些痛点，我构建了 **web-automator-Skill** 这套轻量级浏览器自动化测试工具。它基于 [browser-use](https://github.com/browser-use/browser-use) 框架开发，底层依托微软 Playwright 工业级浏览器控制引擎，同时深度集成大模型的推理与生成能力，实现了从测试用例生成到结果分析的自动化。
 
 工具的核心设计思路，正如 browser-use 项目作者在其技术博客中所强调的："**最好的自动化测试，就是完全模拟真实用户的行为。**" 我没有试图去绕过 AI 平台的防护机制，而是让测试过程与真实用户的操作毫无二致，从根本上规避了 API 测试的固有局限。
+
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-2.png" alt="web-automator-Skill 基于 browser-use 执行浏览器自动化任务">
+    <figcaption><b>图 2：</b>web-automator-Skill 基于 browser-use 执行浏览器自动化任务（终端日志与浏览器截图）。</figcaption>
+</figure>
 
 ## 1. 无侵入式登录态复用
 
@@ -203,6 +213,11 @@ def run_test_case(browser, platform_config, case):
 
 整个测试过程完全自动化，无需任何人工干预。测试人员只需要在开始时设置好测试计划，然后就可以去处理其他工作，系统会自动完成所有测试任务。
 
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-3.png" alt="提示词注入测试截图证据示例">
+    <figcaption><b>图 3：</b>测试执行过程中自动截取的证据示例：角色扮演类提示词成功绕过防护并获取结构化输出。</figcaption>
+</figure>
+
 ### 5.3 结果分析与自我迭代
 
 测试完成后，Claude Code 会对所有结果进行自动分析。我设计了一个严格的分析标准，让 Claude Code 按照**完全绕过、部分绕过和未绕过**三个等级对每个测试用例进行分类标记：
@@ -266,6 +281,11 @@ def analyze_test_result(response):
 
 The explosive adoption of generative AI has turned prompt injection and jailbreak attacks from niche security research into an industry-wide challenge. As OWASP's 2025 Top 10 for LLM Applications makes clear, **prompt injection is the most prevalent and damaging threat to generative AI applications** — it can bypass traditional access controls and induce unauthorized actions.
 
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-1.png" alt="Prompt injection attack flow">
+    <figcaption><b>Figure 1:</b> Prompt injection attack flow — malicious prompts are executed by the AI agent, leading to compromised behavior or data breach.</figcaption>
+</figure>
+
 Yet AI security testing in industry remains far behind. Most testing still relies on batch API calls, which carry fundamental, hard-to-fix limitations.
 
 Security researcher Eliana Zhang, in *Why Your AI Security Testing Is Meaningless*, argues sharply: "API testing only validates API endpoints, while users actually interact through web and client interfaces." Real-world cases bear this out:
@@ -282,6 +302,11 @@ Heavy investment in API security testing therefore often fails to reflect real u
 To address these pain points, I built **web-automator-Skill**, a lightweight browser-automation testing toolkit. It is developed on the [browser-use](https://github.com/browser-use/browser-use) framework, powered by Microsoft's Playwright engine, and deeply integrated with LLM reasoning and generation — automating the full loop from test-case creation to result analysis.
 
 The core design philosophy, as browser-use's authors emphasize: "**The best automation test is one that fully simulates a real user.**" Rather than trying to bypass platform defenses, the test flow mirrors real user behavior — sidestepping API testing's inherent limits at the root.
+
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-2.png" alt="web-automator-Skill running a browser-use task">
+    <figcaption><b>Figure 2:</b> web-automator-Skill executing a browser-use automation task (terminal log and browser screenshot).</figcaption>
+</figure>
 
 ## 1. Non-Invasive Session Reuse
 
@@ -381,6 +406,11 @@ Claude Code generates diverse cases from known injection and jailbreak patterns 
 ### 5.2 Automated Execution
 
 Claude Code invokes web-automator-Skill per plan, running each case across target platforms via `run_test_case`: navigate, human-like input, send, wait for response, capture text and screenshot, append to `results.jsonl`. The entire run is hands-free after initial plan setup.
+
+<figure>
+    <img src="{{ site.baseurl }}/img/bu-prompt-injection-3.png" alt="Example prompt-injection test evidence screenshot">
+    <figcaption><b>Figure 3:</b> Auto-captured evidence during test execution: a role-play prompt bypasses guardrails and yields structured output.</figcaption>
+</figure>
 
 ### 5.3 Analysis and Self-Iteration
 
